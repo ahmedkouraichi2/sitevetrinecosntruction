@@ -1,0 +1,56 @@
+
+/**************************************************
+* Shopping cart tpl
+*/
+#print-quotation:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+#customer-information .form-group {
+    float: left;
+    width: 100%;
+}
+#customer-information input { height: 48px;}
+#customer-information .cart_navigation button {
+    margin: 20px 0 0 20px;
+}
+#customer-information .cart_navigation {
+    margin: 0 0 20px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+#customer-information .form-group label, #customer-information .clearfix label {
+    padding-right: 10px;
+}
+
+#customer-information button {
+margin-left: 15px;
+}
+
+#customer-information button i {
+    font-size: 25px;
+    line-height: 25px;
+    vertical-align: -4px;
+}
+
+
+@media screen and (max-width: 768px) {
+    /**************************************************
+    * Shopping cart tpl
+    */
+    #customer-information .form-group {
+        float: left;
+        width: 50%;
+    }
+    
+    #customer-information .form-group label {
+        display: block;
+    }
+}
+

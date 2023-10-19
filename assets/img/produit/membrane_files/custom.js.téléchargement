@@ -1,0 +1,344 @@
+
+$(document).ready(function () {
+	$(".header_user_info.topbar-box .text_user").hover(
+
+		function () {
+			$(this).find('.menu_compte_client.quick-setting').stop().slideDown(450);
+		},
+		function () {
+			$(this).find('.menu_compte_client.quick-setting').stop().slideUp(450);
+		}
+	
+	
+	);
+	if ($(window).width() >= 991) {
+
+		var elem = document.querySelector("#header");
+		var headroom = new Headroom(elem);
+		headroom.init();
+
+	}
+
+});
+
+$(window).on('scroll', function () {
+
+
+	if ($(window).width() >= 991) {
+		if ($('body#index,body#category,body#contact,body#product,body#manufacturer,body#prices-drop').length) {
+			if ((($('body#category,body#prices-drop').length) && $('.ajax_block_product').length < 5) || (($('body#prices-drop').length) && $('.ajax_block_product').length < 5)) {
+
+			} else {
+
+				if ($(window).scrollTop() <= 220) {
+					$('#header').removeClass("header_omg_im_scrolled");
+					$('body').removeClass("omg_im_fixed");
+					$('body').removeClass("omg_fix_footer");
+				} else {
+					$('#header').addClass("header_omg_im_scrolled");
+					$('body').addClass("omg_im_fixed");
+
+
+				}
+			}
+		}
+	}
+
+});
+
+$(document).ready(function () {
+	if ($('.partager_sociaux').length) {
+		$(".partager_sociaux").click(function (e) {
+			e.preventDefault();
+			$(this).next().toggle();
+
+		});
+	}
+	if ($('#custhtmlcarosel949147866').length) {
+			$('#custhtmlcarosel949147866').owlCarousel({
+				responsive: {
+					0: { items: 2, nav: true },
+					570: { items: 3, nav: true },
+					576: { items: 3, nav: true },
+					768: { items: 3, nav: true },
+					992: { items: 3, nav: true },
+					1024: { items: 6, nav: true }
+				},
+				mouseDrag: true,
+				touchDrag: true,
+				pullDrag: true,
+				smartSpeed: 400,
+				autoplay: true,
+
+				dots: false,
+			});
+		}
+	if ($('#blockproductscategory').length) {
+		$('#blockproductscategory').owlCarousel({
+			responsive: {
+				0: { items: 1, nav: true },
+				480: { items: 2, nav: true },
+				576: { items: 2, nav: true },
+				768: { items: 3, nav: true },
+				992: { items: 4, nav: true },
+				1024: { items: 4, nav: true }
+			},
+			mouseDrag: true,
+			touchDrag: true,
+			pullDrag: true,
+			smartSpeed: 400,
+			autoplay: true,
+
+			dots: false,
+		});
+	}
+
+	if ($('#nos-ref').length) {
+				$('#nos-ref').owlCarousel({
+					loop: true,
+					responsive: {
+						0: {
+							items: 2,
+							nav: false
+						},
+						570: {
+							items: 3,
+							nav: true
+						},
+						576: {
+							items: 3,
+							nav: true
+						},
+						768: {
+							items: 6,
+							nav: true
+						}
+					},
+					autoplay: true,
+					smartSpeed: 800,
+					navText: ["<i class='ion-ios-arrow-left'></i>", "<i class='ion-ios-arrow-right'></i>"],
+					dots: false
+				});
+	}
+	if ($('.caretd').length) {
+		$(document.body).on('click', '.caretd', function (e) {
+
+			e.preventDefault();
+			$('li').removeClass('openall');
+			var $parent = $(this).parent();
+			$parent.toggleClass('openall');
+
+		});
+	}
+
+
+	if ($('.magnific-all').length) {
+		$('.magnific-all').each(function () {
+			var $container = $(this);
+			var $imageLinks = $container.find('.magnific-item');
+
+			var items = [];
+			$imageLinks.each(function () {
+				var $item = $(this);
+				var type = 'image';
+				if ($item.hasClass('magnific-youtube')) {
+					type = 'iframe';
+				}
+				var magItem = {
+					src: $item.attr('href'),
+					type: type
+				};
+				magItem.title = $item.data('title');
+				items.push(magItem);
+			});
+
+			$imageLinks.magnificPopup({
+				mainClass: 'mfp-fade',
+				items: items,
+				gallery: {
+					enabled: true,
+					tPrev: $(this).data('prev-text'),
+					tNext: $(this).data('next-text')
+				},
+				type: 'image',
+				callbacks: {
+					beforeOpen: function () {
+						var index = $imageLinks.index(this.st.el);
+						if (-1 !== index) {
+							this.goTo(index);
+						}
+					}
+				}
+			});
+
+		});
+	}
+	if ($('#newsgallery').length) {
+		$('#newsgallery').owlCarousel({
+			loop: true,
+			responsive: {
+				0: {
+					items: 2
+				},
+				570: {
+					items: 3
+				},
+				576: {
+					items: 3
+				},
+				768: {
+					items: 3
+				}
+			},
+			autoplay: true,
+			smartSpeed: 800,
+			dots: false,
+			nav: false
+		});
+	}
+
+	$('.sprsearch-form').submit(function (e) {
+	
+		e.preventDefault();
+		if ($('.text-search input').val() == '' || $('.text-search input').val().length < 3) {
+			
+			if ($('.text-search input').val() == '') {	
+				$('.diverreur').html(" <strong> <i class='fa fa-hand-o-down' aria-hidden='true'></i> Ajouter des mots clés </strong> ");
+				$('.diverreur').show();
+				$('.spr-search-button').attr('disabled', 'disabled');
+			} else {
+
+				$('.diverreur').html(" <i class='fa fa-hand-o-down' aria-hidden='true'></i> Le mot  doit contenir 3 caractères minimum");
+				$('.diverreur').show();
+	
+				$('.spr-search-button').attr('disabled', 'disabled');
+	
+			}
+		}else{
+			e.currentTarget.submit();
+		}
+	});
+	$('.diverreur').click(function (e) {
+		e.preventDefault();
+		$('.spr-search-button').removeAttr('disabled');
+		$('.diverreur').hide();
+	
+	});
+	
+	
+});
+
+
+$(document).ready(function (e) {
+
+
+	$('.text-search input').change(function (e) {
+		e.preventDefault();
+		if ($(this).val() != '') {
+			$('.spr-search-button').removeAttr('disabled');
+			$('.diverreur').hide();
+		}
+	});
+
+	$('.text-search input').focusout(function () {
+
+		if ($(this).val() != '') {
+			$('.spr-search-button').removeAttr('disabled');
+			$('.diverreur').hide();
+		} else {
+
+
+		}
+	});
+
+
+
+if ($('.contact-form-box').length) {
+	$('.contact-form-box').submit(function (e) {
+
+		$('#error_nom span').html('');
+		$('#error_prenom span').html('');
+		$('#error_tel span').html('');
+		$('#error_email span').html('');
+		$('#error_id_contact span').html('');
+		$('#error_message span').html('');
+		$('#error_captcha span').html('');
+		$('#error').hide();
+
+		if ($('.form-group').find("#nom").val() != '' && !validate_isName($('.form-group').find("#nom").val())) {
+
+			$('#error_nom span').html('Nom:ce champs n\'est pas valide.');
+			$('#error').show();
+			$('#error_nom').show();
+		} else if ($('.form-group').find("#nom").val() == '') {
+			e.preventDefault();
+			$('#error_nom span').html('Nom: Veuillez renseigner ce champs.');
+			$('#error').show();
+			$('#error_nom').show();
+		}
+		if ($('.form-group').find("#prenom").val() != '' && !validate_isName($('.form-group').find("#prenom").val())) {
+			e.preventDefault();
+			$('#error_prenom span').html('Prénom: ce champs n\'est pas valide.');
+			$('#error').show();
+			$('#error_prenom').show();
+		} else if ($('.form-group').find("#prenom").val() == '') {
+			e.preventDefault();
+			$('#error_prenom span').html('Prénom: Veuillez renseigner ce champs.');
+			$('#error').show();
+			$('#error_prenom').show();
+		}
+
+		if ($('.form-group').find("#tel").val() != '' && !validate_isPhoneNumber($('.form-group').find("#tel").val())) {
+			e.preventDefault();
+			$('#error_tel span').html('Tel: ce champs n\'est pas valide.');
+			$('#error').show();
+			$('#error_tel').show();
+		} else if ($('.form-group').find("#tel").val() == '') {
+			e.preventDefault();
+			$('#error_tel span').html('Tel: Veuillez renseigner ce champs.');
+			$('#error').show();
+			$('#error_tel').show();
+		}
+
+		if ($('.form-group').find("#email").val() != '' && !validate_isEmail($('.form-group').find("#email").val())) {
+			e.preventDefault();
+			$('#error_email span').html('Email: ce champs n\'est pas valide.');
+			$('#error').show();
+			$('#error_email').show();
+		} else if ($('.form-group').find("#email").val() == '') {
+			e.preventDefault();
+			$('#error_email span').html('Email: Veuillez renseigner ce champs.');
+			$('#error').show();
+			$('#error_email').show();
+		}
+
+		if ($('.form-group').find("#id_contact").val() == '0') {
+			e.preventDefault();
+			$('#error_id_contact span').html('Sujet :Veuillez renseigner ce champs');
+			$('#error').show();
+			$('#error_id_contact').show();
+		}
+
+
+		if ($('.form-group').find("#message").val() != '' && !validate_isMessage($('.form-group').find("#message").val())) {
+			e.preventDefault();
+			$('#error_message span').html('Message: ce champs n\'est pas valide.');
+			$('#error').show();
+			$('#error_message').show();
+		} else {
+			if ($('.form-group').find("#message").val() == '') {
+				e.preventDefault();
+				$('#error_message span').html('Message:Veuillez renseigner ce champs');
+				$('#error').show();
+				$('#error_message').show();
+			}
+		}
+
+
+
+	});
+}
+
+
+
+});

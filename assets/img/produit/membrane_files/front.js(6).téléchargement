@@ -1,0 +1,136 @@
+/**
+ * Since 2015 Ewonta
+ *
+ * NOTICE OF LICENSE
+ *
+ * This file is not open source! Each license that you purchased is only available for 1 wesite only.
+ * If you want to use this file on more websites (or projects), you need to purchase additional licenses. 
+ * You are not allowed to redistribute, resell, lease, license, sub-license or offer our resources to any third party.
+ *
+ *  @author Ewonta <support@ewonta.ru>
+ *  @copyright  Since 2015 Ewonta
+ *  @license    Valid for 1 website (or project) for each purchase of license
+ */
+
+$(document).ready(() => {
+
+  preorderButtonsStatusRefresh()
+	if(typeof $('#product_page_product_id').val() != "undefined") {
+		geButPreorder($('#product_page_product_id').val(),$('#id_preorder_attribute').val(),$('#quantity_wanted').val());
+	}
+ 
+            
+prestashop.on('updatedProduct', function (event) {
+
+ $('#id_preorder_attribute').val(event.id_product_attribute);
+	geButPreorder($('#product_page_product_id').val(),event.id_product_attribute,$('#quantity_wanted').val());
+
+});
+
+$('body').on('click', '.view_modal_preorder', function (event) {
+
+  if(typeof $('#product_page_product_id').val() != "undefined") {
+    $('.tit_prod_preorder').text($('h1').text());
+    $('#qty_preorder').val($('#quantity_wanted').val());
+     $('#id_attr_preorder').val($('#id_preorder_attribute').val());
+    
+  } 
+
+  $('.quickview').modal('hide')
+
+
+ $('#id_product_preorder').val($('#product_page_product_id').val());
+});
+// $('body').on('click', '.rew_preor', function (event) {
+
+//  $('.tit_prod_preorder').text($(this).attr('data-name'));
+//  $('#id_attr_preorder').val($(this).attr('data-attribute'));
+//  $('#id_product_preorder').val($(this).attr('data-id'));
+
+// });
+$('.addpreorder').on('submit', function(e){
+
+
+             e.preventDefault();
+  var thiss = $(this);
+  $('.add-to-preorder').find('i').html('autorenew').addClass('atc_spinner');
+$('.add-to-preorder').prop('disabled',true);
+    var vars = $(this).serialize();
+   
+    $.ajax({
+        type: "POST",
+        headers: {"cache-control": "no-cache"},
+        async: true,
+        cache: false,
+        url: link_preorder_ajax,
+        data:vars,  
+        success: function(response) {
+
+         $('.product-quantity .add').show();
+        if (response == 'true') {
+          $('.mass_succes').fadeIn();
+          thiss.hide();
+        }
+
+
+         
+      }
+        });
+
+
+ });
+
+
+prestashop.on('clickQuickView', (err) => {
+
+setTimeout(function(){
+  geButPreorder(err.dataset.idProduct,err.dataset.idProductAttribute,$('#quantity_wanted').val());
+}, 1000);
+
+});
+
+
+function geButPreorder(id_product,id_preorder_attribute,qty) {
+	 $.ajax({
+      type: 'GET',
+      url: link_preorder_ajax,
+      headers: { "cache-control": "no-cache" },
+      async: true,
+      cache:false,
+      data: 'action=get_buttom&id_product='+id_product+'&qty='+qty+'&id_preorder_attribute='+id_preorder_attribute,
+      success: function(data) {
+        
+        if (data != 'false') {
+          $('.product-quantity .add').html( data );
+          $('.preorder').show();  
+          $('.product-quantity .add').show();  
+        } else {
+          $('.product-quantity .add').show();  
+        }
+      
+          
+      }
+  });
+}
+
+  $('body').on('click', '.view_modal_preorder_miniature', function (event) {
+    $('.tit_prod_preorder').text($(this).data('name'));
+    $('#qty_preorder').val(1);
+    $('#id_attr_preorder').val($(this).data('id-product-attribute'));
+    $('#id_product_preorder').val($(this).data('id-product'));
+    $('.quickview').modal('hide')  
+  });
+
+
+});
+
+function preorderButtonsStatusRefresh()
+{
+    $('.js-product-miniature').each(function() {
+      if ($(this).find('.preorderstatus').length) {
+        let element = $($(this).find('.preorderstatus button')).clone()
+        $(this).find('.add-to-cart').replaceWith(element)
+        $($(this).find('.preorderstatus')).empty();
+      }    
+    });
+}

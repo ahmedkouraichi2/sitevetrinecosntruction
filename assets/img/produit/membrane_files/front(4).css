@@ -1,0 +1,511 @@
+/**
+* 2007-2015 PrestaShop
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Academic Free License (AFL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/afl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@prestashop.com so we can send you a copy immediately.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade PrestaShop to newer
+* versions in the future. If you wish to customize PrestaShop for your
+* needs please refer to http://www.prestashop.com for more information.
+*
+*  @author    PrestaShop SA <contact@prestashop.com>
+*  @copyright 2007-2015 PrestaShop SA
+*  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+*  International Registered Trademark & Property of PrestaShop SA
+*
+* Don't forget to prefix your containers with your own identifier
+* to avoid any conflicts with others containers.
+*/
+
+.result-price{
+    color: #000;
+    border-bottom: 0px solid rgb(238, 238, 238);
+    display: inline-block;
+    width: 100%;
+    padding: 0px 0 15px 0;
+    margin-bottom: 10px;
+
+}
+.result-price table tr td {
+    padding-bottom: 6px;
+}
+.result-price hr {
+    margin-top: 12px;
+    margin-bottom: 0;
+    border: 0;
+    border-top: 1px solid #eeeeee;
+}
+.result-price .inner{
+	border-bottom: 1px solid rgb(238, 238, 238);
+    display: inline-block;
+    width: 100%;
+    padding: 20px 0 20px 0;}
+.result-price .frame{
+	overflow: hidden;
+
+    margin: 0 0 14px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+}
+.titleunity,.first-price span.titleunity{ font-size: 14px; font-weight: bold; color: #232323; display: inline-block; margin-right:10px;}
+.last-price{    font-size: 18px;
+    font-family: "OpenSans";
+    color: #0470d4;
+    font-weight: 600;
+    line-height: 0.8;}
+    
+	.old_price_display{ line-height: 0.8; margin: 0; padding: 0;}
+.buttons_bottom_block{ float: left;}
+
+.first-price{
+	font-size: 26px;
+	font-family: "Roboto";
+	color: #c90000;
+	font-weight: 900;
+
+}
+.first-price span.old_price_display,.frame .old_price_display{
+	font-size: 14px;
+    font-family: "Roboto";
+    color: rgb(117, 117, 117);
+    font-weight: bold;
+    text-decoration: line-through;
+    line-height: 2;margin-right: 10px;
+    margin-left: 3px;}
+    .price_article{        font-family: "OpenSans"; font-size: 16px;
+        color: #0470d4;
+        font-weight: 600;}
+	.old-price_res{font-size: 14px;
+		font-family: "OpenSans", sans-serif;
+		color: #f50000;
+		font-weight: bold;
+		line-height: 1.2;
+		text-align: center;
+		text-decoration: line-through;
+		margin-right: 6px;
+		clear: both;
+		display: block;}
+.first-price .icon-tag{font-size: 24px;}
+.first-price em{font-style:normal;}
+.first-price span{
+	font-weight:400;
+	font-size:21px;
+	line-height:21px;
+}
+.first-price span.title{
+	font-weight:400;
+	font-size:16px;
+	line-height:16px; color:#000;
+}
+.first-price span sup{
+	font-size:10px;
+	line-height:10px;
+}
+.icon1,
+.icon2,
+.icon_sp{
+    float:left;
+}
+
+.icon2{
+    display:block;
+    width:26px;
+    height:20px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAUCAMAAACknt2MAAAAilBMVEUAAAAzMzMzMzMzMzMxMTEzMzMzMzMzMzMxMTEyMjIzMzM0NDQzMzMzMzMzMzMyMjIzMzMzMzMzMzMyMjIzMzMzMzMzMzMzMzMyMjI2NjYzMzMzMzMzMzM0NDQyMjIzMzMzMzMzMzMmJiY4ODgyMjIxMTE0NDQ2NjY1NTU0NDQ7Ozs8PDxPT08zMzOW2bg9AAAALXRSTlMArttXCv34Dx8m9V/EpxfScyzu6OPXuWdjHcqzqKGSewfem5eEbVJRRz89NRN1A1ySAAAAvklEQVQoz63RyQ6CMBSF4SNtKdSqDALiPM/3/V9PCrfBhez80kWTPx2SC5ZuR1+Co4S3yKmnmiU4RBuijfB2psmlbss1oHyxB5PL9mTltuuQKCuKgGXUmteAoN+22K9J7ZKkGjtVkpwVpxUeISn3xYkzBrThC18oiULNb5MForArT8BmxmggFU7kk7kBiEWhNDyfZlM06mAwxf9LVg4lcwcniV7t0gU+TWUvbtLJz/dAq1GvVGTfnLQlxvK0Cx9ZWCByiU1JrwAAAABJRU5ErkJggg==) no-repeat;
+    } 
+
+.icon1{
+    display:block;
+    width:25px;
+    height:25px;
+    background: url("../img/case_mini.jpg") no-repeat;
+    }
+
+
+.icon_sp{margin:0 4px;}
+.square{
+	font-size:14px;
+	line-height:16px;
+	padding:0px 0 0;
+	color:#000;
+	clear: both;
+}
+.square img{vertical-align:top;}
+.square-value em{
+	font-style:normal;
+}
+.square .num{
+	float:left;
+	padding:2px 4px 0 0;
+}
+.square-form .form-frame{
+	overflow:hidden;
+}
+
+
+
+#square_item, #quantity_item{
+    width: 78px;
+    float: left;
+    border-width: 1px;
+    border-color: rgb(238, 238, 238);
+    border-style: solid;
+    margin-top: 0px;
+    font-size: 18px;
+    font-family: "Roboto";
+    color: rgb(117, 117, 117);
+    line-height: 1.2;
+    text-align: center;
+    font-weight: 500;
+    padding: 15px 0;
+    height: 43px;
+    line-height: 43px;
+    display: inline-block;
+    border: 1px solid rgb(189, 194, 201);
+
+}
+.vegal{ font-size:32px; margin: 15px 15px 0 0px;display: inline-block;}
+.flex-quantity{ display: flex; justify-content: flex-start; align-items: center;}
+.area_quantity_down{ margin-right: 1px;}
+.area_quantity_up{ margin-left: 1px;}
+.sometext{
+	color: #888;
+	font-size: 12px; margin-left:12px
+}
+
+.input-holder{
+	margin:0 0px 0 0;
+}
+
+.total-holder .pull-left{float: left;}
+
+.input-holder .title{
+	display:block;
+	font-size:13px;
+	line-height:15px;
+	font-weight:normal;
+	padding:0 0 3px;
+}
+.input-holder .title.align-left{
+	text-align:left;
+	padding:0 0 7px;
+}
+.input-holder .title span{
+	color:#000;
+}
+.input-holder .title sup{
+	font-size:10px;
+	line-height:10px;
+}
+.added-inputs .input-frame{
+	font-size:15px;
+	line-height:24px;
+}
+.minus,
+.plus{
+	float:left;
+	background:url(images/plus-minus.png) no-repeat;
+	width:33px;
+	height:41px;
+	overflow:hidden;
+	text-indent:-9999px;
+	cursor:pointer;
+}
+.plus{background-position:-43px 0;}
+.smaller .minus,
+.smaller .plus{
+	width:35px;
+	height:30px;
+	background-position:-86px 0;
+}
+.smaller .plus{background-position:-131px 0;}
+.square-form .input-frame .text{
+	float:left;
+	width:64px;
+	text-align:center;
+	height:41px;
+}
+.square-form .smaller .text{
+	height:30px;
+	width:34px;
+}
+.square-form .sometext{
+	font-size:13px;
+	line-height:18px;
+	color:#888;
+	margin:29px 0 0;
+	float:left;
+}
+
+.total{
+	font-size: 18px;
+	display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center; margin-top: 15px; padding-left: 15px;
+}
+.innerall .text-left {
+    text-align: left;
+    padding-left: 15px;
+}
+ .innerall .last-prices { font-size: 20px;
+    font-family: "OpenSans";
+    color: #0470d4;
+    font-weight: 600;
+    line-height: 1.2;margin-top: 15px;
+}
+#quantity_item_p{
+	margin: 0;
+}
+
+.pack_note{
+	font-size: smaller;
+}
+
+.icon-minus, .icon-plus{
+	display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+}
+
+.icon-minus{
+	content: "\f068";
+}
+
+.icon-plus{
+	content: "\f067";
+}
+.result-price-list {
+    font-size: 18px;
+    font-family: "OpenSans";
+    color: #0470d4;
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.hovered .result-price-list {
+	color: #fff;
+}
+.titleunityitem{ font-size: 16px;}
+.area_quantity_down, .area_quantity_up {
+	color: #000;
+    border: 1px solid #bdc2c9;
+    padding: 0;
+    line-height: 15px;
+    clear: both;
+    background-color: rgb(238, 238, 238);
+    height: 43px;
+    width: 26px;
+    text-align: center;
+    line-height: 43px;
+}
+
+.area_input_block {
+	display: flex;
+    justify-content:flex-end;
+    align-items: center;
+}
+
+#category .product-miniature .product-description .product-title{
+	    margin-top: 0.5rem;
+	    margin-bottom: 0;
+}
+
+@media (max-width: 1199px) {
+    .total {
+  
+    padding-left: 0;
+}
+.last-price {
+    font-size: 16px;
+
+}
+.innerall .last-prices {
+    font-size: 16px;
+}
+#square_item, #quantity_item {
+    width: 62px;
+
+    font-size: 16px;
+   
+    padding: 10px 0;
+
+}
+
+}
+
+@media (max-width: 991px) {
+    .result-price table tr td {
+        padding-bottom: 6px;
+        width: auto;
+    }
+    
+    .res
+    .innerall .text-left {
+        text-align: left;
+        padding-left: 5px;
+    }
+    .titleunityitem {
+        font-size: 13px;
+    }
+    .titleunity, .first-price span.titleunity {
+        font-size: 13px;
+        font-weight: bold;
+        color: #232323;
+        display: inline-block;
+        margin-right: 10px;
+    }
+    .vegal {
+        font-size: 24px;
+        margin: 0px 0 0 0;
+        display: inline-block;
+        margin-left: 20px;
+    }
+
+    .result-price .table2 tr td {
+        display: inline-block;
+        width: 100%;
+        text-align: center; padding-left: 0;
+    }
+    .flex-quantity {
+        justify-content: center;
+        align-items: center;
+    }
+    .area_input_block {
+      
+        align-items: center;
+    }
+    #quantity_item_p ,.input-holder{
+        margin: 0;
+        display: flex;
+        align-content: center;
+        justify-content:space-between;
+        align-items: center; width: 100%;
+    }
+    .area_input_block {
+        align-items: center;
+        width: auto;
+        margin-left: 10px;
+        width: 60%;
+        text-align: center;
+        display: flex;
+        float: left;
+        justify-content: flex-start;
+    }
+    .product-information {
+  
+        padding: 5px 5px;
+    }
+    .result-price table tr td.typeunity  {
+     
+        width: 20%;
+    }
+    .result-price table tr td {
+        padding-bottom: 6px;
+        width: 40%;
+    }
+    .result-price table tfoot tr.total-all {
+        display: flex;
+        width: 100%;
+    }
+    .result-price .table2 tr td.total-t3 {
+        display: none;
+    }
+    .result-price .table2 tr td {
+        text-align: right !important;
+    }
+    .total {
+        justify-content: flex-end;
+    }
+   #product .result-price .table2 tr td {
+        text-align: center !important;
+    }
+
+   
+}
+
+@media (max-width: 380px) {
+    .vegal {
+  
+        margin-left: 40px;
+    }
+}
+@media (max-width: 380px) {
+    .vegal {
+
+        margin-left: 50px;
+    }
+
+    .result-price .frame {
+      
+        flex-wrap: wrap;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        justify-content: space-between;
+    }    
+    .blocksoit{ display: none !important;}
+
+    .pb-center-column .result-price table tbody tr td.first-price{ width:100%;}
+    .pb-center-column .result-price table tbody tr td.typeunity {
+        width: 30%;
+    }
+    .result-price .table2 tr td {
+        text-align: left !important;
+    }
+    .result-price table tfoot tr {
+        display: inline-block;
+        width: 100%;
+    }
+    .result-price .table2 tr td {
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        padding-left: 0;
+    }
+    .input-holder .title {
+        display: block;
+        font-size: 13px;
+        width: 100%;
+        text-align: left;
+    }
+
+    .table2 .area_input_block {
+        padding: 0;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        margin: 0;
+    }
+    .pb-center-column .result-price table tbody tr td.typeunity {
+        width: 30% !important;
+    }
+    .last-price {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 300px){
+    .price_article {
+    font-family: "OpenSans";
+    font-size: 14px;
+    color: #0470d4;
+    font-weight: 600;
+}
+.vegal {
+    margin-left: 67px;
+}
+}

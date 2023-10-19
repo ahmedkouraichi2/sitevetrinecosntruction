@@ -1,0 +1,274 @@
+/**
+* 2007-2015 PrestaShop
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Academic Free License (AFL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/afl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@prestashop.com so we can send you a copy immediately.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade PrestaShop to newer
+* versions in the future. If you wish to customize PrestaShop for your
+* needs please refer to http://www.prestashop.com for more information.
+*
+*  @author    PrestaShop SA <contact@prestashop.com>
+*  @copyright 2007-2021 PrestaShop SA
+*  @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+*  International Registered Trademark & Property of PrestaShop SA
+*
+* Don't forget to prefix your containers with your own identifier
+* to avoid any conflicts with others containers.
+*/
+
+$(document).ready(function($){
+	
+	//var curQty = parseInt($('#quantity_wanted').val());
+
+    var startQty = parseInt($('#minimal_quantity_label').html());
+    if (startQty > 1) {
+    	updQty(startQty);
+    }
+    
+	if ($(".result-price").html()){
+		$(".content_prices,.js-product-prices, #quantity_wanted_p,.js-product-add-to-cart .qty").hide();
+		$(".product-quantity").parent().find(".control-label").hide();
+	}
+
+	$(".result-price-list").each(function(){
+		$(this).parent().find(".price, .old-price, .price-percent-reduction,.uniti_listing").hide();
+	})
+	
+	$('#quantity_item').keyup(function(e) {
+		e.preventDefault();
+	    var qty = $( this ).val();
+	    updQty(qty);
+	  });
+	
+	$('#square_item').keyup(function(e) {
+		if (e.keyCode != '190'){
+		    var new_sq = $( this ).val();
+		    var minArea = $(".sq").data('mib');
+		    var qty = Math.ceil(new_sq/minArea);
+		    
+		    delay(function(){
+		    	updQty(qty);
+		      }, 1000 );
+		}
+	  });
+});
+
+var delay = (function(){
+	  var timer = 0;
+	  return function(callback, ms){
+	    clearTimeout (timer);
+	    timer = setTimeout(callback, ms);
+	  };
+	})();
+
+$(document).on('click', '.input-radio, .input-color, .form-control-select', function(e){
+	var id_product = parseInt($("#product_page_product_id").val());
+	var product_attribute = $(this).data('productAttribute');
+	
+	if ($(".product-variants-item").length > 1) {
+		var attrId = [];
+		var i = parseInt(0);
+		$.each($(".product-variants-item"), function() {
+			tt_id = $(this).find('.input-radio:checked, .input-color:checked, .form-control-select').val();
+			attrId[i] = tt_id;
+			i++;
+		})
+	} else {
+		var attrId = parseInt($(this).val());		
+	}
+	
+	updatePriceByArea(id_product, attrId, product_attribute);
+});
+
+function updatePriceByArea(id_product, attrId, product_attribute)
+{
+	$.ajax({
+		type: 'GET',
+		url: areapacks_ajax_controller_url,
+		headers: { "cache-control": "no-cache" },
+		async: true,
+		dataType: "json",
+		cache: false,
+		data: 'attrId=' + attrId + '&id_product=' + id_product + '&product_attribute=' + product_attribute,
+		success: function(data)
+		{
+			if (data) {
+				var square_item = $("#square_item").val();
+				if (square_item != data.area) {
+					var newArea = parseFloat(data.area);
+					var qty = $("#quantity_item").val();
+					$("#square_item").val(newArea.toFixed(2));
+					$(".sq").data('mib', newArea.toFixed(2));
+					$(".square-value em").text(newArea.toFixed(2));
+					
+					$(".sq").data('price', data.price);
+					if (pak_type == 1) {
+						var firstPrice = data.price;						
+					} else {
+						var firstPrice = data.price/data.area;						
+					}
+					
+					if (cur_decimals == 1){
+						$(".first-price em").text(firstPrice.toFixed(2));
+					} else {
+						$(".first-price em").text(parseInt(firstPrice));
+					}
+				    updQty(qty);
+				}
+			}
+		}
+	});	
+}
+
+$(document).on('click', '.color_pick', function(e){
+	var id_product = $('#product_page_product_id').val();
+	var product_attribute = $(this).attr('id').replace('color_', '');
+	if ($(".attribute_fieldset").length > 1) {
+		var attrId = [];
+		var i = parseInt(0);
+		$.each($(".attribute_fieldset"), function() {
+			tt_id = $(this).find('.input-radio:checked, .input-color:checked, .attribute_select').val();
+			attrId[i] = tt_id;
+			i++;
+		});
+		attrId[i] = parseInt(product_attribute);
+	} else {
+		var attrId = parseInt(product_attribute);		
+	}
+	updatePriceByArea(id_product, attrId, product_attribute);
+});
+
+$(document).on('click', '.attribute_select', function(e){
+	var id_product = $('#product_page_product_id').val();
+	var product_attribute = $(this).val();
+	if ($(".attribute_fieldset").length > 1) {
+		var attrId = [];
+		var i = parseInt(0);
+		$.each($(".attribute_fieldset"), function() {
+			tt_id = $(this).find('.input-radio:checked, .input-color:checked, .attribute_select').val();
+			attrId[i] = tt_id;
+			i++;
+		})
+	} else {
+		var attrId = parseInt(product_attribute);		
+	}
+	updatePriceByArea(id_product, attrId, product_attribute);
+});
+
+$(document).on('click', '.area_quantity_up', function(e){
+    e.preventDefault();
+    var currentVal = parseInt($('#quantity_wanted').val());
+    if (!isNaN(currentVal)){
+    	var newVal = currentVal + 1;
+    	updQty(newVal);
+    }
+});
+ // The button to decrement the product value
+$(document).on('click', '.area_quantity_down', function(e){
+    e.preventDefault();
+	
+    var currentVal = parseInt($('#quantity_wanted').val());
+    var minQty = parseInt($('#minimal_quantity_label').html());
+    if (isNaN(minQty)) {
+    	minQty = 1;
+    }
+
+    if (!isNaN(currentVal) && currentVal > minQty){
+    	var newVal = currentVal - 1;
+    	updQty(newVal);
+    }else
+        $('#quantity_item').val(minQty);
+});
+
+function formatPriceTND(price) {
+
+ // Convertir le prix en une chaîne de caractères
+ price = price.toString();
+
+ // Diviser la chaîne en parties entière et décimales
+ var parts = price.split('.');
+
+ // Ajouter un séparateur de milliers à la partie entière
+
+
+ // Formater la partie décimale avec 3 chiffres après la virgule
+ if (parts.length > 1) {
+   parts[1] = parts[1].substr(0, 3);
+ } else {
+   parts.push("000");
+ }
+
+ if (parts[1].length == 2) {
+	parts[1]=parts[1]+ "0";
+ }
+
+ if (parts[1].length == 1) {
+	parts[1]=parts[1]+ "00";
+ }
+
+ console.log(parts);
+ // Concaténer les parties avec une virgule comme séparateur décimal
+ return parts.join(',') + " DT"; 
+  }
+function updQty(newVal)
+{
+    var minArea = $(".sq").data('mib');
+    var price_item = $(".sq").data('price');
+    var lastPrice = price_item * newVal;
+	
+	$(".total .num").html(newVal);
+	var square_item = minArea*newVal;
+	$("#square_item").val(square_item.toFixed(3));
+	$("#titleunityitem").html(square_item.toFixed(3));
+	$(".total .square-value em").html(square_item.toFixed(3));
+	$('#quantity_item').val(newVal);
+	if (cur_decimals == 1){
+
+		$(".last-price span").html(formatPriceTND(lastPrice));
+
+	} else{
+		$(".last-price span").html(formatPriceTND(price_item*newVal));
+	}
+	$('input[name=qty]').val(newVal).trigger('keyup');
+}
+$(document).on('click', '.area_qty_cart_up', function(e){
+    e.preventDefault();
+    qty_el = $(this).parents('.qty').find(".js-cart-line-product-quantity");
+    var qty = parseInt(qty_el.val());
+    if (!isNaN(qty)){
+    	var newVal = qty + 1;
+    	qty_el.val(newVal).focusout();
+    }
+});
+
+$(document).on('click', '.area_qty_cart_down', function(e){
+    e.preventDefault();
+    qty_el = $(this).parents('.qty').find(".js-cart-line-product-quantity");
+    var qty = parseInt(qty_el.val());
+    if (!isNaN(qty) && qty != 1){
+    	var newVal = qty - 1;
+    	qty_el.val(newVal).focusout();
+    }
+});
+
+$(document).on('keyup', '.area_sq_item', function(e){
+	if (e.keyCode != '190'){
+	    var new_sq = $( this ).val();
+	    var minArea = $(".sq").data('mib');
+	    var qty = Math.ceil(new_sq/minArea);
+	    qty_el = $(this).parents('.qty').find(".js-cart-line-product-quantity");
+	    delay(function(){
+	    	qty_el.val(qty).focusout();
+	      }, 1000 );
+	}
+  });
